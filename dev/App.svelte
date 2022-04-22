@@ -1,7 +1,43 @@
 <script>
+  import VirtualList from "../src/index.js";
+  import TargetComponent from "./helpers/TargetComponent.svelte";
+  import data from "./helpers/data.json";
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  let records = data.records;
+  let height = 600,
+    heights = [800, 600, 500, 300, 100],
+    loading = false;
+  export let _items = new Array(100)
+    .fill()
+    .map(() => records[Math.floor(Math.random() * records.length)]);
+
+  export let start = 0,
+    end = 0;
+
+  $: {
+    if (end === _items.length - 10) {
+      loadMore();
+    }
+  }
+
+  const loadMore = async () => {
+    loading = true;
+    await sleep(1000);
+    let itemsToAdd = _items.sort(() => 0.5 - Math.random()).slice(0, 20); // get random 20 items
+    _items = [..._items, ...itemsToAdd];
+    loading = false;
+  };
+
+  function rowClicked(e) {
+    console.log(e.detail);
+  }
 </script>
-<style>
-</style>
+
+
+
+
+
 
 <a
   href="https://github.com/SharifClick/svelte-vlist"
@@ -36,5 +72,17 @@
   </svg>
 </a>
 <div class="container">
-
+  <div class="row">
+    <div class="column is-narrow">
+      <p class="has-text-centered">
+        Showing items {start}-{end} of {_items.length}
+      </p>
+      <div
+        style="height:{height}px;width:500px; border:1px solid rgba(0,0,0,0.1); position:relative;">
+        <VirtualList items={_items} bind:start bind:end let:item let:index>
+          <TargetComponent {item} {index} on:rowClick={rowClicked} />
+        </VirtualList>
+      </div>
+    </div>
+  </div>
 </div>
