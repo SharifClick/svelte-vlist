@@ -1,1 +1,1 @@
-export { default as Vlist } from "./Vlist.svelte";
+export { default as default } from "./Vlist.svelte";
