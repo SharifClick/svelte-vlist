@@ -3,7 +3,9 @@
   class="kws-virtual-list"
   on:scroll={() => window.requestAnimationFrame(() => refresh())}
   style="height:{height}"
-  bind:offsetHeight={viewportHeight}>
+  bind:offsetHeight={viewportHeight}
+  on:resize={resize}
+  >
   <div
     bind:this={ROWS_CONTAINER}
     style="padding-top: {top}px; padding-bottom: {bottom}px;">
@@ -41,6 +43,10 @@
 
   $: items, viewportHeight, render();
 
+  const resize = () => {
+    console.log("resize");
+    viewportHeight = ELEMENT.offsetHeight;
+  };
 
   onMount(() => {
     if (!Array.isArray(items)) {
