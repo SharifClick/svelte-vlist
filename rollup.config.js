@@ -3,6 +3,7 @@ import bundleSize from 'rollup-plugin-bundle-size'
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
+import json from '@rollup/plugin-json';
 import pkg from './package.json';
 
 export default [
@@ -17,7 +18,8 @@ export default [
 			commonjs(),
 			resolve(),
 			terser(),
-			bundleSize()
+			bundleSize(),
+			json()
 		]
 	}
 ];
