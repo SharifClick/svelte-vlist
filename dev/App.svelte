@@ -1,10 +1,10 @@
 <script>
   import VirtualList from "../src/index.js";
   import TargetComponent from "./helpers/TargetComponent.svelte";
-  import data from "./helpers/data.json";
+  import * as data from "./helpers/data.json";
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  let records = data.records;
+  let records = data;
   let height = 600,
     heights = [800, 600, 500, 300, 100],
     loading = false;
