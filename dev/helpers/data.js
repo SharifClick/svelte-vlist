@@ -1,4 +1,4 @@
-[
+export default [
   { "username": "user1", "name": "Jhon", "surname": "Doe", "role": "A", "status" : "1" },
   { "username": "user2", "name": "James", "surname": "Bond", "role": "U", "status" : "1" },
   { "username": "user3", "name": "Tony", "surname": "Starks", "role": "U", "status" : "1" },
