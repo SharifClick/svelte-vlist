@@ -1,6 +1,6 @@
 <div
   bind:this={ELEMENT}
-  class="kws-virtual-list"
+  class="svelte-vlist"
   on:scroll={() => window.requestAnimationFrame(() => refresh())}
   style="height:{height}"
   bind:offsetHeight={viewportHeight}
@@ -17,6 +17,26 @@
   </div>
 </div>
 
+<style>
+  .svelte-vlist{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    height: 100%;
+  }
+  .svelte-vlist::-webkit-scrollbar {
+    width: 6px;
+  }
+  .svelte-vlist::-webkit-scrollbar-track {
+    background: grey;
+    box-shadow: inset 0 0 1px #999;
+  }
+  .svelte-vlist::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 0;
+  }
+
+</style>
 <script>
   import { onMount, tick } from "svelte";
 
