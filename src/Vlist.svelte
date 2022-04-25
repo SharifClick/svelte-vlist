@@ -1,42 +1,3 @@
-<div
-  bind:this={ELEMENT}
-  class="svelte-vlist"
-  on:scroll={() => window.requestAnimationFrame(() => refresh())}
-  style="height:{height}"
-  bind:offsetHeight={viewportHeight}
-  on:resize={resize}
-  >
-  <div
-    bind:this={ROWS_CONTAINER}
-    style="padding-top: {top}px; padding-bottom: {bottom}px;">
-    {#each visibleItems as item (item.index)}
-      <div class="row">
-        <slot item={item.data} index={item.index} />
-      </div>
-    {/each}
-  </div>
-</div>
-
-<style>
-  .svelte-vlist{
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    height: 100%;
-  }
-  .svelte-vlist::-webkit-scrollbar {
-    width: 6px;
-  }
-  .svelte-vlist::-webkit-scrollbar-track {
-    background: grey;
-    box-shadow: inset 0 0 1px #999;
-  }
-  .svelte-vlist::-webkit-scrollbar-thumb {
-    background: black;
-    border-radius: 0;
-  }
-
-</style>
 <script>
   import { onMount, tick } from "svelte";
 
@@ -131,3 +92,43 @@
     end = newEnd;
   }
 </script>
+
+<style>
+  .vlist{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    height: 100%;
+  }
+  .vlist::-webkit-scrollbar {
+    width: 6px;
+  }
+  .vlist::-webkit-scrollbar-track {
+    background: grey;
+    box-shadow: inset 0 0 1px #999;
+  }
+  .vlist::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 0;
+  }
+
+</style>
+
+<div
+  bind:this={ELEMENT}
+  class="vlist"
+  on:scroll={() => window.requestAnimationFrame(() => refresh())}
+  style="height:{height}"
+  bind:offsetHeight={viewportHeight}
+  on:resize={resize}
+  >
+  <div
+    bind:this={ROWS_CONTAINER}
+    style="padding-top: {top}px; padding-bottom: {bottom}px;">
+    {#each visibleItems as item (item.index)}
+      <div class="row">
+        <slot item={item.data} index={item.index} />
+      </div>
+    {/each}
+  </div>
+</div>
