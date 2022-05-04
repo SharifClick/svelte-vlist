@@ -1,2 +1,2 @@
 # svelte-vlist
-This is a list component that allow big amount data render with high performance and efficient. WIP
+Yet another virtual list component for svelte. WIP
